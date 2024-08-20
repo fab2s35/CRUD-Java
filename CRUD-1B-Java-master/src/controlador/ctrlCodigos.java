@@ -22,9 +22,11 @@ public class ctrlCodigos implements MouseListener{
         
         vista.btnAgregar.addMouseListener(this);
         
-        
-       
+       //SIEMPRE PONER ESTO, SON LOS BOTONES, HAY QUE MANDAR A LLAMAR
+       //Es antes o des pues,generalmente lo ponemos despues
         modelo.Mostrar(vista.jtbCodigos);
+        vista.btnElimnar.addMouseListener(this);
+        vista.jtbCodigos.addMouseListener(this);
     }
     
     //4- Elimino los "throw new" de todos antes de progrmar las acciones
@@ -38,8 +40,25 @@ public class ctrlCodigos implements MouseListener{
             
             //4.2 Cierro lo mandado a llamar, para que funcione
             modelo.Guardar();
-                    
-
+            modelo.Mostrar(vista.jtbCodigos);                 
+        }
+        //(Clase2) 
+        if (e.getSource() == vista.btnElimnar){
+            modelo.Eliminar(vista.jtbCodigos);
+            modelo.Mostrar(vista.jtbCodigos);    
+        }
+        
+        if(e.getSource() == vista.jtbCodigos){
+            modelo.cargarDatosTabla(vista);
+        }
+        
+        if(e.getSource() == vista.btnActualizar){
+            modelo.setNombre_estudiante(vista.txtNombre.getText());
+            modelo.setTipo_Codigo(vista.txtTipoCodigo.getText());
+            modelo.setCarnet_estudiante(Integer.parseInt(vista.txtCarnet.getText()));
+            
+            modelo.Actualizar(vista.jtbCodigos);
+            modelo.Mostrar(vista.jtbCodigos);
         }
         
     }
